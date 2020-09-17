@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Stop_Watch</title>
+
+<style>
+.container {
+  display: flex;
+  height: 300px;
+  justify-content: center;
+  align-items: center;
+  margin: 100px;
+  padding: 100px;
+}
+button
+{
+  margin: 50px;
+  width: 200px;
+  height: 70px;
+  font-size: xx-large;
+}
+
+</style>
+</head>
+<body>
+   
+  <div class="container">
+    <div>
+    <button id="start_stop" onclick="start_stop()">START</button>
+    </div>
+    <div>
+    <button onclick="reset()">RESET</button>
+    </div>
+    <h1 id="show">00:00:00</h1>
+</div>
+
+    <script>
+      
+     var sec=0;
+      var minute=0;
+      var hour=0;
+
+       var running=false;
+      function start_stop()
+      {
+             if(running==false)
+             {
+               document.getElementById('start_stop').innerHTML="pause";
+               interval= window.setInterval(timer,1000);
+               running=true;
+             }
+             else
+             {
+               document.getElementById('start_stop').innerHTML="resume";
+               window.clearInterval(interval);
+               running=false;
+             }
+      } 
+      
+      function timer()
+      {
+           sec++;
+       
+           if(sec==60)
+           {
+             sec=0;
+             minute++;
+           }
+           if(minute==60)
+           {
+             minute=0;
+             hour++;
+           }
+
+           var display="";
+           if(hour<=9)
+           display+="0"+hour;
+           else
+           display+=hour;
+             
+             display+=":"
+           if(minute<=9)
+           display+="0"+minute;
+           else
+           display+=minute;
+          
+            display+=":";
+           if(sec<=9)
+           display+="0"+sec;
+           else
+           display+=sec;
+           
+           document.getElementById('show').innerHTML=display;
+      }
+          
+          function reset()
+          {
+            sec=0;minute=0;hour=0;
+               document.getElementById('show').innerHTML="00:00:00";
+               document.getElementById('start_stop').innerHTML="START";
+               window.clearInterval(interval);
+               running=false;
+          }
+
+    </script>
+
+
+
+</body>
+</html>
